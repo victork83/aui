@@ -141,21 +141,6 @@ configure_mirrorlist(){
   rm /etc/pacman.d/mirrorlist.tmp
   # allow global read access (required for non-root yaourt execution)
   chmod +r /etc/pacman.d/mirrorlist
-#  echo #Репозиторий Yaourt >> /etc/pacman.d/mirrorlist
-#  echo [archlinuxfr] >> /etc/pacman.d/mirrorlist
-#  echo Server = http://repo.archlinux.fr/$arch >> /etc/pacman.d/mirrorlist
-#  echo #Репозиторий Powerpill >> /etc/pacman.d/mirrorlist
-#  echo [xyne-any] >> /etc/pacman.d/mirrorlist
-#  echo Server = http://xyne.archlinux.ca/repos/xyne >> /etc/pacman.d/mirrorlist
-#  echo
-#  echo 'Сейчас откроется файла /etc/pacman.conf, в этом файле необходимо расскомментировать'
-#  echo 'Color'
-#  echo '[multilib]'
-#  echo 'Include = /etc/pacman.d/mirrorlist'
-#  echo
-#  echo 'И закомментировать #SigLevel = Required DatabaseOptional'
-#  echo 'Для продолжения нажмите Enter'
-#  read
   $EDITOR /etc/pacman.d/mirrorlist
 }
 #}}}
@@ -552,7 +537,9 @@ format_partitions(){
 install_base_system(){
   print_title "INSTALL BASE SYSTEM"
   print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
-  rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
+  rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/*
+  rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/grub
+  rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/EFI/arch_grub
   pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
   [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
   local PTABLE=`parted -l | grep "gpt"`
@@ -675,8 +662,11 @@ configure_locale(){
     setlocale
     read_input_text "Confirm locale ($LOCALE)"
   done
-  echo 'LANG="'$LOCALE_UTF8'"' > ${MOUNTPOINT}/etc/locale.conf
-  arch_chroot "sed -i 's/#'${LOCALE_UTF8}'/'${LOCALE_UTF8}'/' /etc/locale.gen"
+  echo 'en_US.UTF-8 UTF-8' > ${MOUNTPOINT}/etc/locale.conf
+  echo 'LANG="'$LOCALE_UTF8'"' >> ${MOUNTPOINT}/etc/locale.conf
+  echo 'en_US.UTF-8 UTF-8' > ${MOUNTPOINT}/etc/locale.gen
+  echo 'LANG="'$LOCALE_UTF8'"' >> ${MOUNTPOINT}/etc/locale.gen
+  #arch_chroot "sed -i 's/#'${LOCALE_UTF8}'/'${LOCALE_UTF8}'/' /etc/locale.gen"
   arch_chroot "locale-gen"
 }
 #}}}
@@ -759,6 +749,16 @@ configure_bootloader(){
         esac
       done
       arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg"
+      arch_chroot "pacman -S terminus-font mc"
+      echo
+      echo 'устанавливаем шрифт и переключение клавиатуры по Alt-Shift'
+      echo 'LOCALE="ru_RU.UTF-8"' > ${MOUNTPOINT}/etc/vconsole.conf
+      echo 'KEYMAP="ruwin_alt_sh-UTF-8"' >> ${MOUNTPOINT}/etc/vconsole.conf
+      echo 'FONT="ter-v16n"' >> ${MOUNTPOINT}/etc/vconsole.conf
+      echo 'CONSOLEMAP=""' >> ${MOUNTPOINT}/etc/vconsole.conf
+      echo
+      echo 'Для продолжения нажмите Enter'
+      read
       ;;
     Syslinux)
       print_title "SYSLINUX - https://wiki.archlinux.org/index.php/Syslinux"
@@ -861,8 +861,8 @@ root_password(){
 finish(){
   print_title "INSTALL COMPLETED"
   #COPY AUI TO ROOT FOLDER IN THE NEW SYSTEM
-  print_warning "\nA copy of the AUI will be placed in /home directory of your new system"
-  cp -R `pwd` ${MOUNTPOINT}/home
+  print_warning "\nA copy of the AUI will be placed in /root directory of your new system"
+  cp -R `pwd` ${MOUNTPOINT}/root
   read_input_text "Reboot system"
   if [[ $OPTION == y ]]; then
     umount_partitions
