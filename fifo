@@ -141,21 +141,21 @@ configure_mirrorlist(){
   rm /etc/pacman.d/mirrorlist.tmp
   # allow global read access (required for non-root yaourt execution)
   chmod +r /etc/pacman.d/mirrorlist
-  echo #Репозиторий Yaourt >> /etc/pacman.d/mirrorlist
-  echo [archlinuxfr] >> /etc/pacman.d/mirrorlist
-  echo Server = http://repo.archlinux.fr/$arch >> /etc/pacman.d/mirrorlist
-  echo #Репозиторий Powerpill >> /etc/pacman.d/mirrorlist
-  echo [xyne-any] >> /etc/pacman.d/mirrorlist
-  echo Server = http://xyne.archlinux.ca/repos/xyne >> /etc/pacman.d/mirrorlist
-  echo
-  echo 'Сейчас откроется файла /etc/pacman.conf, в этом файле необходимо расскомментировать'
-  echo 'Color'
-  echo '[multilib]'
-  echo 'Include = /etc/pacman.d/mirrorlist'
-  echo
-  echo 'И закомментировать #SigLevel = Required DatabaseOptional'
-  echo 'Для продолжения нажмите Enter'
-  read
+#  echo #Репозиторий Yaourt >> /etc/pacman.d/mirrorlist
+#  echo [archlinuxfr] >> /etc/pacman.d/mirrorlist
+#  echo Server = http://repo.archlinux.fr/$arch >> /etc/pacman.d/mirrorlist
+#  echo #Репозиторий Powerpill >> /etc/pacman.d/mirrorlist
+#  echo [xyne-any] >> /etc/pacman.d/mirrorlist
+#  echo Server = http://xyne.archlinux.ca/repos/xyne >> /etc/pacman.d/mirrorlist
+#  echo
+#  echo 'Сейчас откроется файла /etc/pacman.conf, в этом файле необходимо расскомментировать'
+#  echo 'Color'
+#  echo '[multilib]'
+#  echo 'Include = /etc/pacman.d/mirrorlist'
+#  echo
+#  echo 'И закомментировать #SigLevel = Required DatabaseOptional'
+#  echo 'Для продолжения нажмите Enter'
+#  read
   $EDITOR /etc/pacman.d/mirrorlist
 }
 #}}}
