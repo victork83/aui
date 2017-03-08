@@ -745,6 +745,9 @@ configure_bootloader(){
         esac
       done
       arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg"
+      echo
+      echo 'Устанавливаем русский шрифт для консоли и Midnight Commander'
+      echo
       arch_chroot "pacman -S terminus-font mc"
       arch_chroot "loadkeys ru"
       arch_chroot "setfont cyr-sun16"
@@ -755,14 +758,13 @@ configure_bootloader(){
       arch_chroot "locale-gen"
       sleep 1
       echo
-      echo 'устанавливаем шрифт и переключение клавиатуры по Alt-Shift'
+      echo 'Включаем русский шрифт в консоли и устанавливаем переключение раскладки по Alt-Shift'
+      sleep 1
       echo 'LOCALE="ru_RU.UTF-8"' > ${MOUNTPOINT}/etc/vconsole.conf
       echo 'KEYMAP="ruwin_alt_sh-UTF-8"' >> ${MOUNTPOINT}/etc/vconsole.conf
       echo 'FONT="ter-v16n"' >> ${MOUNTPOINT}/etc/vconsole.conf
       echo 'CONSOLEMAP=""' >> ${MOUNTPOINT}/etc/vconsole.conf
       echo
-      #echo 'Для продолжения нажмите Enter'
-      read
       ;;
     Syslinux)
       print_title "SYSLINUX - https://wiki.archlinux.org/index.php/Syslinux"
