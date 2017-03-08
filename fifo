@@ -50,9 +50,12 @@ sleep 2
 echo
 echo 'Включаем синхронизацию времени'
 timedatectl set-ntp true
-sleep 2
 echo
 echo 'Проверка'
+timedatectl status
+sleep 3
+clear
+timedatectl set-ntp true
 timedatectl status
 echo 'Для продолжения нажмите Enter'
 read
@@ -649,6 +652,8 @@ configure_hardwareclock(){
     [[ -n $OPT ]] && break
   done
   hwclock=$OPT
+  arch_chroot "timedatectl set-ntp true";
+  arch_chroot "timedatectl status";
 }
 #}}}
 #CONFIGURE LOCALE {{{
