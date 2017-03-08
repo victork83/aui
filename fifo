@@ -52,11 +52,9 @@ echo 'Включаем синхронизацию времени'
 timedatectl set-ntp true
 echo
 echo 'Проверка'
-timedatectl status
 sleep 3
-clear
-timedatectl set-ntp true
 timedatectl status
+echo
 echo 'Для продолжения нажмите Enter'
 read
 
@@ -652,8 +650,6 @@ configure_hardwareclock(){
     [[ -n $OPT ]] && break
   done
   hwclock=$OPT
-  arch_chroot "timedatectl set-ntp true";
-  arch_chroot "timedatectl status";
 }
 #}}}
 #CONFIGURE LOCALE {{{
@@ -665,11 +661,8 @@ configure_locale(){
     setlocale
     read_input_text "Confirm locale ($LOCALE)"
   done
-  echo 'en_US.UTF-8 UTF-8' > ${MOUNTPOINT}/etc/locale.conf
-  echo 'LANG="'$LOCALE_UTF8'"' >> ${MOUNTPOINT}/etc/locale.conf
-  echo 'en_US.UTF-8 UTF-8' > ${MOUNTPOINT}/etc/locale.gen
-  echo 'LANG="'$LOCALE_UTF8'"' >> ${MOUNTPOINT}/etc/locale.gen
-  #arch_chroot "sed -i 's/#'${LOCALE_UTF8}'/'${LOCALE_UTF8}'/' /etc/locale.gen"
+  echo 'LANG="'$LOCALE_UTF8'"' > ${MOUNTPOINT}/etc/locale.conf
+  arch_chroot "sed -i 's/#'${LOCALE_UTF8}'/'${LOCALE_UTF8}'/' /etc/locale.gen"
   arch_chroot "locale-gen"
 }
 #}}}
@@ -753,6 +746,14 @@ configure_bootloader(){
       done
       arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg"
       arch_chroot "pacman -S terminus-font mc"
+      arch_chroot "loadkeys ru"
+      arch_chroot "setfont cyr-sun16"
+      sleep 1
+      echo 'en_US.UTF-8 UTF-8' > ${MOUNTPOINT}/etc/locale.gen
+      echo 'ru_RU.UTF-8 UTF-8' >> ${MOUNTPOINT}/etc/locale.gen
+      sleep 1
+      arch_chroot "locale-gen"
+      sleep 1
       echo
       echo 'устанавливаем шрифт и переключение клавиатуры по Alt-Shift'
       echo 'LOCALE="ru_RU.UTF-8"' > ${MOUNTPOINT}/etc/vconsole.conf
@@ -760,7 +761,7 @@ configure_bootloader(){
       echo 'FONT="ter-v16n"' >> ${MOUNTPOINT}/etc/vconsole.conf
       echo 'CONSOLEMAP=""' >> ${MOUNTPOINT}/etc/vconsole.conf
       echo
-      echo 'Для продолжения нажмите Enter'
+      #echo 'Для продолжения нажмите Enter'
       read
       ;;
     Syslinux)
