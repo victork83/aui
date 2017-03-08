@@ -251,7 +251,7 @@ create_partition_scheme(){
 #}}}
 #SETUP PARTITION{{{
 create_partition(){
-  apps_list=("cfdisk" "cgdisk" "fdisk" "gdisk" "parted");
+  apps_list=("fdisk" "cfdisk" "cgdisk" "gdisk" "parted");
   PS3="$prompt1"
   echo -e "Select partition program:"
   select OPT in "${apps_list[@]}"; do
@@ -537,7 +537,7 @@ format_partitions(){
 install_base_system(){
   print_title "INSTALL BASE SYSTEM"
   print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
-  rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/grub; rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/EFI/arch_grub; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/*
+  rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/grub; rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/EFI/arch_grub; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/init*; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/ref*; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlin*
   pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
   [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
   local PTABLE=`parted -l | grep "gpt"`
