@@ -817,6 +817,7 @@ configure_bootloader(){
   pause_function
   echo
   echo 'Устанавливаем русский шрифт для консоли и проводник Midnight Commander'
+  sleep 2
   echo
   pacstrap ${MOUNTPOINT} terminus-font mc
   arch_chroot "loadkeys ru"
@@ -835,6 +836,7 @@ configure_bootloader(){
   echo 'FONT="ter-v16n"' >> ${MOUNTPOINT}/etc/vconsole.conf
   echo 'CONSOLEMAP=""' >> ${MOUNTPOINT}/etc/vconsole.conf
   echo
+  pause_function
 }
 #}}}
 #ROOT PASSWORD {{{
