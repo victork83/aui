@@ -4,6 +4,10 @@ Install and configure archlinux has never been easier!
 
 You can try it first with a `virtualbox`
 
+Для запуска установки в UEFI-режиме потребуется дополнительный виртуальный жёсткий диск, получить его можно командой
+
+VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-файлу>
+
 ## Prerequisites
 
 - A working internet connection
