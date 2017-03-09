@@ -15,13 +15,13 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 
 ## Как получить этот скрипт
 ### С помомщью git
-- Сначала необходимо увеличить размер раздела cowspace, командой: `mount -o remount,size=2G /run/archiso/cowspace`
+- Необходимо увеличить размер раздела cowspace: `mount -o remount,size=2G /run/archiso/cowspace`
 - Получить список пакетов и установить git командой: `pacman -Sy git`
 - Загрузить сам скрипт: `git clone git://github.com/victork83/aui`
 
 ## Как использовать скрипты
-- FIFO [system base]: `cd <dir> && ./fifo`
-- LILO [the rest...]: `cd <dir> && ./lilo`
+- FIFO [system base]: `cd aui && ./fifo`
+- LILO [the rest...]: `cd aui && ./lilo`
 
 ## FIFO СКРИПТ
 - Configure keymap
