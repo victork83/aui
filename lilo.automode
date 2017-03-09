@@ -1,19 +1,10 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------
-#Created by helmuthdu mailto: helmuthdu[at]gmail[dot]com
-#-------------------------------------------------------------------------------
-#This program is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
-#
-#This program is distributed in the hope that it will be useful,
-#but WITHOUT ANY WARRANTY; without even the implied warranty of
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#GNU General Public License for more details.
-#
-#You should have received a copy of the GNU General Public License
-#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# Скрипт создан helmuthdu mailto: helmuthdu[at]gmail[dot]com
+# Частично русифицирован и модифицирован victork83 mailto: victor.kovalsky[at]gmail.com
+# 
+# Скрипт автоматической установки настроен на установку KDE и ПО для KDE. Если нужен другой DE необходимо скорректировать опции.
+# После завершения редактирования необходимо сохранить файл и выйти из редактора.
 #-------------------------------------------------------------------------------
 
 #MAINMENU {{{
@@ -37,12 +28,12 @@
 #BASIC SETUP {{{
   CUPS="y"
   CUSTOMREPO="n"         # Add custom repositories
-  FIRMWARE="y"           # Install custom firmwares
-  NFS="n"
+  FIRMWARE="n"           # Install custom firmwares
+  NFS="y"
   READAHEAD="y"
   SAMBA="y"
   SSH="y"
-  TLP="n"                # Laptop Power Manager
+  TLP="y"                # Laptop Power Manager
   ZRAM="y"
   ZSH="y"
   OH_MY_ZSH="y"
@@ -83,14 +74,14 @@
   #12) i3
   #13) OpenBox
   #14) Xmonad
-  DESKTOPENV=4
+  DESKTOPENV=5
   #KDE {{{
     # 1) Choqok
     # 2) Digikam
     # 3) K3b
     # 4) Skrooge
     # 5) Yakuake
-    KDE_OPTIONS="1-5"
+    KDE_OPTIONS="5"
   #}}}
   #ESSENTIAL APPS [Enlightenment,LXDE,Awesome,Fluxbox,OpenBox] {{{
     # 1) Display Manager
@@ -106,7 +97,7 @@
     #11) Xcompmgr
     #12) Zathura
     #13) speedtest-cli
-    MISCAPPS="1 3"
+    MISCAPPS=""
   #}}}
   #DISPLAY MANAGER {{{
     # 1) Elsa
@@ -114,18 +105,18 @@
     # 3) LightDM
     # 4) SSDM
     # 5) Slim
-    DISPLAY_MANAGER="3"
+    DISPLAY_MANAGER=""
   #}}}
   # 1) Icons Themes
   # 2) GTK2|GTK3 Themes
-  THEMES_OPTIONS="1 2"
+  THEMES_OPTIONS=""
   #ICONS THEMES {{{
     # 1) Numix
-    ICONS_THEMES="1"
+    ICONS_THEMES=""
   #}}}
   #GTK THEMES {{{
     # 1) Arc
-    GTK_THEMES="1"
+    GTK_THEMES=""
   #}}}
 #}}}
 #NETWORK MANAGER {{{
@@ -135,7 +126,7 @@
   # n) None
   NETWORKMANAGER=1
   #USB 3G MODEM SUPPORT
-  USBMODEM="y"
+  USBMODEM="n"
 #}}}
 #ACCESSORIES {{{
   # 1) Albert
@@ -148,7 +139,9 @@
   # 8) Enpass
   # 9) Shutter|Hotshots
   #10) Terminix
-  ACCESSORIES_OPTIONS="10"
+  #11) Double Commander
+  #12) KDE Calculator
+  ACCESSORIES_OPTIONS="2 4 6-9 11-12"
 #}}}
 #DEVELOPEMENT {{{
   # 1) Atom
@@ -163,7 +156,7 @@
   #10) OpenJDK
   #11) OracleJDK
   #12) NodeJS
-  DEVELOPMENT_OPTIONS="11"
+  DEVELOPMENT_OPTIONS="2 5 11"
 #}}}
 #OFFICE {{{
   # 1) Abiword+Gnumeric|Calligra
@@ -177,7 +170,7 @@
   # 9) LibreOffice
   #10) OCRFeeder
   #11) Xmind
-  OFFICE_OPTIONS="9"
+  OFFICE_OPTIONS="2 6 8 9 11"
 #}}}
 #SYSTEM TOOLS {{{
   # 1) ClamAV
@@ -188,12 +181,12 @@
   # 6) Grsync
   # 7) Hosts Update
   # 8) Htop
-  # 9) Plex
+  # 9) Plex Media Server (XBMC)
   #10) UFW
   #11) Unified Remote
   #12) Virtualbox
   #13) Wine
-  SYSTEMTOOLS_OPTIONS="10"
+  SYSTEMTOOLS_OPTIONS="5 6 8 9 11 12"
 #}}}
 #GRAPHICS {{{
   # 1) Blender
@@ -206,7 +199,7 @@
   # 8) Scribus
   # 9) Shotwell
   #10) Simple Scan
-  GRAPHICS_OPTIONS="2-7 9"
+  GRAPHICS_OPTIONS="2-4 6"
 #}}}
 #INTERNET {{{
   # 1) Browser
@@ -222,7 +215,7 @@
     # 3) Firefox
     # 4) Midori|Rekonq
     # 5) Opera
-    BROWSERS_OPTIONS="3"
+    BROWSERS_OPTIONS="2 3"
   #}}}
   #DOWNLOAD|FILESHARE {{{
     # 1) AeroFS
@@ -237,12 +230,12 @@
     #10) Trasmission
     #11) uGet
     #12) youtube-dl
-    DOWNLOAD_OPTIONS=""
+    DOWNLOAD_OPTIONS="3-4 6 12"
   #}}}
   #EMAIL|RSS {{{
     # 1) Liferea
     # 2) Thunderbird
-    EMAIL_OPTIONS=""
+    EMAIL_OPTIONS="2"
   #}}}
   #IM|IRC {{{
     # 1) HexChat|Konversation
@@ -253,7 +246,7 @@
     # 6) Viber
     # 7) Telegram Desktop
     # 8) qTox
-    IM_OPTIONS="4"
+    IM_OPTIONS="4 6 7"
   #}}}
   #MAPPING {{{
     # 1) Google Earth
@@ -287,7 +280,7 @@
     #13) Timidity++
     #14) Tomahawk
     #15) quodlibet
-    AUDIO_PLAYER_OPTIONS="4"
+    AUDIO_PLAYER_OPTIONS="4 10"
   #}}}
   #EDITORS|TOOLS {{{
     # 1) Audacity
@@ -312,7 +305,7 @@
     # 7) Popcorn Time
     # 8) VLC
     # 9) Kodi
-    VIDEO_PLAYER_OPTIONS="8"
+    VIDEO_PLAYER_OPTIONS="3 8"
   #}}}
   #EDITORS|TOOLS {{{
     # 1) Arista
@@ -325,7 +318,7 @@
     # 8) Openshot
     # 9) Pitivi
     #10) Transmageddon
-    VIDEO_EDITOR_OPTIONS="1"
+    VIDEO_EDITOR_OPTIONS=""
   #}}}
 #}}}
 #GAMES {{{
@@ -350,7 +343,7 @@
   # 5) ttf-mac-fonts
   # 6) ttf-ms-fonts
   # 7) wqy-microhei
-  FONTS_OPTIONS="1-7"
+  FONTS_OPTIONS="1-6"
 #}}}
 #EXTRA {{{
   # 1) Global Menu
