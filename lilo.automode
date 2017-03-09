@@ -141,7 +141,7 @@
   #10) Terminix
   #11) Double Commander
   #12) KDE Calculator
-  ACCESSORIES_OPTIONS="2 4 6-9 11-12"
+  ACCESSORIES_OPTIONS="2 6-9 11-12"
 #}}}
 #DEVELOPEMENT {{{
   # 1) Atom
@@ -156,7 +156,7 @@
   #10) OpenJDK
   #11) OracleJDK
   #12) NodeJS
-  DEVELOPMENT_OPTIONS="2 5 11"
+  DEVELOPMENT_OPTIONS="2 11"
 #}}}
 #OFFICE {{{
   # 1) Abiword+Gnumeric|Calligra
