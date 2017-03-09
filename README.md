@@ -1,29 +1,29 @@
-# Archlinux Install
+# Скрипт установки Archlinux
 
-Install and configure archlinux has never been easier!
+Данный скрипт упрощает установку "с нуля" системы ArchLinux!
 
-You can try it first with a `virtualbox`
+Вначале данный скрипт можно опробовать в `virtualbox`
 
 Для запуска установки в UEFI-режиме потребуется дополнительный виртуальный жёсткий диск, получить его можно командой
 
 VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-файлу>
 
-## Prerequisites
+## Требования
 
-- A working internet connection
-- Logged in as 'root'
+- Подключенное интернет соединение (LAN или Wi-Fi). Для использования WI-FI можно воспользоваться командой wifi-menu
+- Запуск скрипта от 'root'а
 
-## How to get it
-### With git
-- Increase cowspace partition: `mount -o remount,size=2G /run/archiso/cowspace`
-- Get list of packages and install git: `pacman -Sy git`
-- get the script: `git clone git://github.com/victork83/aui`
+## Как получить этот скрипт
+### С помомщью git
+- Сначала необходимо увеличить размер раздела cowspace, командой: `mount -o remount,size=2G /run/archiso/cowspace`
+- Получить список пакетов и установить git командой: `pacman -Sy git`
+- Загрузить сам скрипт: `git clone git://github.com/victork83/aui`
 
-## How to use
+## Как использовать скрипты
 - FIFO [system base]: `cd <dir> && ./fifo`
 - LILO [the rest...]: `cd <dir> && ./lilo`
 
-## FIFO SCRIPT
+## СКРИПТ FIFO (что делает)
 - Configure keymap
 - Select editor
 - Automatic configure mirrorlist
@@ -40,7 +40,7 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 - Configure mirrorlist
 - Configure root password
 
-## LILO SCRIPT
+## СКРИПТ LILO (что делает)
 - Backup all modified files
 - Install additional repositories
 - Create and configure new user
@@ -66,4 +66,4 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 - Install Games [HoN, World of Padman, Wesnoth...]
 - Install Fonts [Liberation, MS-Fonts, Google-webfonts...]
 - Install and configure Web Servers
-- Many More...
+- И многое другое...
