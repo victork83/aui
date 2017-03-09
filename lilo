@@ -1,22 +1,9 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------
-#Created by helmuthdu, edited by victork83 (not for public)
-#Contribution: flexiondotorg
+# Скрипт создан helmuthdu mailto: helmuthdu[at]gmail[dot]com
+# Частично русифицирован и модифицирован victork83 mailto: victor.kovalsky[at]gmail.com
 #-------------------------------------------------------------------------------
-#This program is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
-#
-#This program is distributed in the hope that it will be useful,
-#but WITHOUT ANY WARRANTY; without even the implied warranty of
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#GNU General Public License for more details.
-#
-#You should have received a copy of the GNU General Public License
-#along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#-------------------------------------------------------------------------------
-# Run this script after your first boot with archlinux (as root)
+# Запустите (от root`а) этот скрипт после установки базовой системы (скрипт fifo) и перезагрузки системы
 
 if [[ -f `pwd`/sharedfuncs ]]; then
   source sharedfuncs
@@ -29,23 +16,16 @@ loadkeys ru
 setfont cyr-sun16
 clear
 script_name=$0 # присваиваем переменной script_name значение имени скрипта
-echo '==================================================='
-echo "Вы запустили скрипт с именем $script_name"
-echo
-echo "Ваш начальный каталог - $HOME, вы подключены к терминалу - `tty` "
+print_title "СКРИПТ УСТАНОВКИ ПО ARCH LINUX ($script_name)"
 echo
 echo 'Данный скрипт выполняет установку базы и ПО Arch Linux'
 echo
 echo 'ВАЖНО!!!! Предполагается что вы знаете и понимаете что делаете.'
 echo 'Будьте осторожны и внимательны при вводе команд.'
 echo
-echo '==================================================='
-echo
-echo 'Для начала работы установочного скрипта нажмите Enter'
+echo 'Для начала работы нажмите Enter'
 read
 clear
-echo
-
 #ARCHLINUX U INSTALL {{{
 #WELCOME {{{
 welcome(){
