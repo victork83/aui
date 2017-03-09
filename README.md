@@ -23,7 +23,7 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 - FIFO [system base]: `cd <dir> && ./fifo`
 - LILO [the rest...]: `cd <dir> && ./lilo`
 
-## СКРИПТ FIFO (что делает)
+## FIFO СКРИПТ
 - Configure keymap
 - Select editor
 - Automatic configure mirrorlist
@@ -40,7 +40,7 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 - Configure mirrorlist
 - Configure root password
 
-## СКРИПТ LILO (что делает)
+## LILO СКРИПТ
 - Backup all modified files
 - Install additional repositories
 - Create and configure new user
