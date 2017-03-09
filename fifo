@@ -519,7 +519,7 @@ format_partitions(){
 install_base_system(){
   print_title "INSTALL BASE SYSTEM"
   print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
-  mkdir ${MOUNTPOINT}/root/backup_efi && cp -R ${MOUNTPOINT}${EFI_MOUNTPOINT}/* ${MOUNTPOINT}/root/backup_efi
+  mkdir ${MOUNTPOINT}/backup_efi && cp -R ${MOUNTPOINT}${EFI_MOUNTPOINT}/* ${MOUNTPOINT}/backup_efi
   rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/grub; rm -rf ${MOUNTPOINT}${EFI_MOUNTPOINT}/EFI/arch_grub; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/init*; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/ref*; rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlin*
   pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
   [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
@@ -851,6 +851,7 @@ finish(){
   #COPY AUI TO ROOT FOLDER IN THE NEW SYSTEM
   print_warning "\nA copy of the AUI will be placed in /root directory of your new system"
   cp -R `pwd` ${MOUNTPOINT}/root
+  mv ${MOUNTPOINT}/backup_efi ${MOUNTPOINT}/root/backup_efi
   read_input_text "Reboot system"
   if [[ $OPTION == y ]]; then
     umount_partitions
