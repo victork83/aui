@@ -179,21 +179,21 @@ select_user(){
   configure_user_account(){
     #BASHRC {{{
     print_title "BASHRC - https://wiki.archlinux.org/index.php/Bashrc"
-    bashrc_list=("Default" "Vanilla" "Get from github");
+    bashrc_list=("Default" "helmuthdu" "Get from github");
     PS3="$prompt1"
     echo -e "Choose your .bashrc\n"
     select OPT in "${bashrc_list[@]}"; do
       case "$REPLY" in
         1)
+          cp /etc/skel/.bashrc /home/${username}
+          ;;
+        2)
           package_install "git"
           package_install "colordiff"
           git clone https://github.com/helmuthdu/dotfiles
           cp dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 dotfiles/.nanorc dotfiles/.yaourtrc ~/
           cp dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 dotfiles/.nanorc dotfiles/.yaourtrc /home/${username}/
           rm -fr dotfiles
-          ;;
-        2)
-          cp /etc/skel/.bashrc /home/${username}
           ;;
         3)
           package_install "git"
@@ -537,16 +537,40 @@ install_zsh(){
         if [[ $OPTION == y ]]; then
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
           run_as_user "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""
+          cp ${AUI_DIR}/.zshrc /home/${username}
           run_as_user "$EDITOR /home/${username}/.zshrc"
         fi
       else
         run_as_user "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""
+        cp ${AUI_DIR}/.zshrc /home/${username}
         run_as_user "$EDITOR /home/${username}/.zshrc"
       fi
     fi
     pause_function
   fi
 }
+#}}}
+#COMMAND LINE SHELL {{{
+  print_title "COMMAND LINE SHELL - https://wiki.archlinux.org/index.php/Command-line_shell"
+  print_info "Если вы хотите всегда пользоваться оболочкой ZSH, для этого нужно изменить настройки системы, установить ее по умолчанию. "
+  defbash_list=("ZSH" "BASH");
+    PS3="$prompt1"
+    echo -e "Укажите оболочку по умолчанию\n"
+    select OPT in "${defbash_list[@]}"; do
+      case "$REPLY" in
+        1)
+          chsh -s /usr/local/bin/zsh
+          ;;
+        2)
+          chsh -s /usr/local/bin/bash
+          ;;
+        *)
+          invalid_option
+          ;;
+      esac
+    [[ -n $OPT ]] && break
+  done
+  pause_function
 #}}}
 #SAMBA {{{
 install_samba(){
@@ -1449,8 +1473,8 @@ install_accessories_apps(){
     echo " 8) $(menu_item "enpass-bin") $AUR"
     echo " 9) $(menu_item "shutter hotshots" "$([[ ${KDE} -eq 1 ]] && echo "Hotshots $AUR" || echo "Shutter";)")"
     echo "10) $(menu_item "terminix") $AUR"
-    echo "11) $(menu_item "doublecmd-qt") $AUR"
-    echo "12) $(menu_item "kcalc") $AUR"
+    echo "11) $(menu_item "doublecmd-qt")"
+    echo "12) $(menu_item "kwrite")"
     echo ""
     echo " b) BACK"
     echo ""
@@ -1471,7 +1495,6 @@ install_accessories_apps(){
           ;;
         4)
           package_install "docky"
-          aur_package_install "dockmanager"
           ;;
         5)
           package_install "galculator"
@@ -1494,6 +1517,12 @@ install_accessories_apps(){
           ;;
         10)
           aur_package_install "terminix"
+          ;;
+        11)
+          package_install "doublecmd-qt"
+          ;;
+        12)
+          package_install "kwrite
           ;;
         "b")
           break
