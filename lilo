@@ -529,19 +529,19 @@ install_zsh(){
   print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter. "
   read_input_text "Install zsh" $ZSH
   if [[ $OPTION == y ]]; then
-    package_install "zsh"
+    package_install "zsh zsh-completions zsh-syntax-highlighting"
     read_input_text "Install oh-my-zsh" $OH_MY_ZSH
     if [[ $OPTION == y ]]; then
       if [[ -f /home/${username}/.zshrc ]]; then
         read_input_text "Replace current .zshrc file"
         if [[ $OPTION == y ]]; then
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
-          run_as_user "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""
+          run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
           cp ${AUI_DIR}/.zshrc /home/${username}
           run_as_user "$EDITOR /home/${username}/.zshrc"
         fi
       else
-        run_as_user "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""
+        run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
         cp ${AUI_DIR}/.zshrc /home/${username}
         run_as_user "$EDITOR /home/${username}/.zshrc"
       fi
@@ -559,10 +559,10 @@ install_zsh(){
     select OPT in "${defbash_list[@]}"; do
       case "$REPLY" in
         1)
-          chsh -s /usr/local/bin/zsh
+          chsh -s /bin/zsh
           ;;
         2)
-          chsh -s /usr/local/bin/bash
+          chsh -s /bin/bash
           ;;
         *)
           invalid_option
