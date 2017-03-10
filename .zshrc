@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+ZSH_THEME="agnoster"
 export ZSH=/home/victor/.oh-my-zsh
 export EDITOR="/bin/nano" 
 #export ARDUINODIR=/usr/share/arduino
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 setopt autocd
 
 autoload -U compinit && compinit
+
 export RPROMPT='[%~] %T'
 
 # Эта настройка установит тему walters для приглашения командной строки
@@ -177,3 +178,4 @@ alias off='sleep 1; xset dpms force off'
 
 alias grep="/usr/bin/grep $GREP_OPTIONS"
 unset GREP_OPTIONS
+zstyle ':completion:*' rehash true

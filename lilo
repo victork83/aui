@@ -538,11 +538,13 @@ install_zsh(){
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
           run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
           cp ${AUI_DIR}/.zshrc /home/${username}
+          echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
           run_as_user "$EDITOR /home/${username}/.zshrc"
         fi
       else
         run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
         cp ${AUI_DIR}/.zshrc /home/${username}
+        echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
         run_as_user "$EDITOR /home/${username}/.zshrc"
       fi
     fi
