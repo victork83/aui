@@ -140,8 +140,8 @@
   # 9) Shutter|Hotshots
   #10) Terminix
   #11) Double Commander
-  #12) KDE Calculator
-  ACCESSORIES_OPTIONS="2 6-9 11-12"
+  #12) KWrite
+  ACCESSORIES_OPTIONS="2 4 6-9 11-12"
 #}}}
 #DEVELOPEMENT {{{
   # 1) Atom
@@ -186,7 +186,7 @@
   #11) Unified Remote
   #12) Virtualbox
   #13) Wine
-  SYSTEMTOOLS_OPTIONS="5 6 8 9 11 12"
+  SYSTEMTOOLS_OPTIONS="5 6 8 11 12"
 #}}}
 #GRAPHICS {{{
   # 1) Blender
@@ -230,7 +230,7 @@
     #10) Trasmission
     #11) uGet
     #12) youtube-dl
-    DOWNLOAD_OPTIONS="3-4 6 12"
+    DOWNLOAD_OPTIONS="3-4 5 11-12"
   #}}}
   #EMAIL|RSS {{{
     # 1) Liferea
@@ -246,7 +246,7 @@
     # 6) Viber
     # 7) Telegram Desktop
     # 8) qTox
-    IM_OPTIONS="4 6 7"
+    IM_OPTIONS="6 7"
   #}}}
   #MAPPING {{{
     # 1) Google Earth
@@ -280,7 +280,7 @@
     #13) Timidity++
     #14) Tomahawk
     #15) quodlibet
-    AUDIO_PLAYER_OPTIONS="4 10"
+    AUDIO_PLAYER_OPTIONS="1 4-5 10"
   #}}}
   #EDITORS|TOOLS {{{
     # 1) Audacity
@@ -332,7 +332,7 @@
   # 2) LAPP - APACHE, POSTGRESQL & PHP
   # 3) LEMP - NGINX, MariaDB & PHP
   # 4) LEPP - NGINX, POSTGRESQL & PHP
-  WEBSERVER=4
+  WEBSERVER=
   POSTGIS="n"
 #}}}
 #FONTS {{{
@@ -340,10 +340,12 @@
   # 2) ttf-fira-code
   # 3) ttf-google-webfonts
   # 4) ttf-liberation
-  # 5) ttf-mac-fonts
-  # 6) ttf-ms-fonts
-  # 7) wqy-microhei
-  FONTS_OPTIONS="1-6"
+  # 5) ttf-bitstream-vera
+  # 6) ttf-hack
+  # 7) ttf-mac-fonts
+  # 8) ttf-ms-fonts
+  # 9) wqy-microhei
+  FONTS_OPTIONS="1 4-8"
 #}}}
 #EXTRA {{{
   # 1) Global Menu
