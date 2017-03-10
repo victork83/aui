@@ -553,6 +553,7 @@ install_zsh(){
 }
 #}}}
 #COMMAND LINE SHELL {{{
+setup_shell(){
   print_title "COMMAND LINE SHELL - https://wiki.archlinux.org/index.php/Command-line_shell"
   print_info "Если вы хотите всегда пользоваться оболочкой ZSH, для этого нужно изменить настройки системы, установить ее по умолчанию. "
   defbash_list=("ZSH" "BASH");
@@ -573,6 +574,7 @@ install_zsh(){
     [[ -n $OPT ]] && break
   done
   pause_function
+  }
 #}}}
 #SAMBA {{{
 install_samba(){
@@ -1524,7 +1526,7 @@ install_accessories_apps(){
           package_install "doublecmd-qt"
           ;;
         12)
-          package_install "kwrite
+          package_install "kwrite"
           ;;
         "b")
           break
@@ -2921,6 +2923,7 @@ do
         add_custom_repositories
         install_basic_setup
         install_zsh
+        setup_shell
         install_ssh
         install_nfs
         install_samba
