@@ -455,6 +455,10 @@ install_basic_setup(){
   print_info "A file system (or filesystem) is a means to organize data expected to be retained after a program terminates by providing procedures to store, retrieve and update data, as well as manage the available space on the device(s) which contain it. A file system organizes data in an efficient manner and is tuned to the specific characteristics of the device."
   package_install "ntfs-3g dosfstools exfat-utils f2fs-tools fuse fuse-exfat autofs mtpfs"
   pause_function
+  print_title "POWERPILL - https://wiki.archlinux.org/index.php/powerpill"
+  print_info "Powerpill is a Pacman wrapper that uses parallel and segmented downloading to try to speed up downloads for Pacman. Internally it uses Aria2 and Reflector to achieve this. Powerpill can also use Rsync  for official mirrors that support it."
+  aur_package_install "powerpill"
+  pause_function
 }
 #}}}
 #SSH {{{
@@ -1651,7 +1655,8 @@ install_office_apps(){
           else
             package_install "gnumeric abiword abiword-plugins"
           fi
-          package_install "hunspell hunspell-$LOCALE_HS"
+          package_install "hunspell"
+          aur_package_install "hunspell-$LOCALE_HS"
           package_install "aspell aspell-$LOCALE_AS"
           ;;
         2)
