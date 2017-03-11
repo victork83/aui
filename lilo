@@ -14,23 +14,12 @@ fi
 
 loadkeys ru
 setfont cyr-sun16
-clear
 script_name=$0 # присваиваем переменной script_name значение имени скрипта
-print_title "СКРИПТ УСТАНОВКИ ПО ARCH LINUX ($script_name)"
-echo
-echo 'Данный скрипт выполняет установку базы и ПО Arch Linux'
-echo
-echo 'ВАЖНО!!!! Предполагается что вы знаете и понимаете что делаете.'
-echo 'Будьте осторожны и внимательны при вводе команд.'
-echo
-echo 'Для начала работы нажмите Enter'
-read
-clear
 #ARCHLINUX U INSTALL {{{
 #WELCOME {{{
 welcome(){
   clear
-  echo -e "${Bold}Welcome to the Archlinux U Install script by victork83${White}"
+  echo -e "${Bold}Welcome to the Archlinux U Install script by victork83 (запущен файл - 'pwd'$script_name)${White}"
   print_line
   echo "Requirements:"
   echo "-> Archlinux installation"
@@ -47,6 +36,10 @@ welcome(){
   [[ ! -f /etc/pacman.conf.aui ]] && cp -v /etc/pacman.conf /etc/pacman.conf.aui || echo "/etc/pacman.conf.aui";
   [[ -f /etc/ssh/sshd_config.aui ]] && echo "/etc/ssh/sshd_conf.aui";
   [[ -f /etc/sudoers.aui ]] && echo "/etc/sudoers.aui";
+  echo 'Данный скрипт выполняет установку базы и ПО Arch Linux'
+  echo
+  echo 'ВАЖНО!!!! Предполагается что вы знаете и понимаете что делаете.'
+  echo 'Будьте осторожны и внимательны при вводе команд.'
   pause_function
   echo ""
 }
@@ -1168,7 +1161,7 @@ install_desktop_environment(){
       print_title "KDE - https://wiki.archlinux.org/index.php/KDE"
       print_info "KDE is an international free software community producing an integrated set of cross-platform applications designed to run on Linux, FreeBSD, Microsoft Windows, Solaris and Mac OS X systems. It is known for its Plasma Desktop, a desktop environment provided as the default working environment on many Linux distributions."
       package_install "plasma kf5 sddm"
-      package_install "ark dolphin dolphin-plugins kio-extras kdeconnect quota-tools gwenview kipi-plugins kate kcalc konsole spectacle okular kdeutils-sweeper kwalletmanager"
+      package_install "ark dolphin dolphin-plugins kio-extras kdeconnect quota-tools gwenview kipi-plugins kate kcalc kmix konsole spectacle okular kdeutils-sweeper kwalletmanager"
       is_package_installed "cups" && package_install "print-manager"
       [[ $LOCALE != en_US ]] && package_install "kde-l10n-$LOCALE_KDE"
       # config xinitrc

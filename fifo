@@ -35,11 +35,9 @@ echo 'Включаем синхронизацию времени'
 timedatectl set-ntp true
 echo
 echo 'Проверка'
-sleep 1
+sleep 2
 timedatectl status
 echo
-echo 'Для продолжения нажмите Enter'
-read
 
 #ARCHLINUX INSTALL SCRIPTS MODE {{{
 #SELECT KEYMAP {{{
