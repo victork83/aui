@@ -305,7 +305,8 @@
     # 7) Popcorn Time
     # 8) VLC
     # 9) Kodi
-    VIDEO_PLAYER_OPTIONS="3 8"
+    # 10) Smplayer
+    VIDEO_PLAYER_OPTIONS="3 8 10"
   #}}}
   #EDITORS|TOOLS {{{
     # 1) Arista
