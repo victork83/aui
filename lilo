@@ -433,7 +433,7 @@ add_custom_repositories(){
 #BASIC SETUP {{{
 install_basic_setup(){
   print_title "BASH TOOLS - https://wiki.archlinux.org/index.php/Bash"
-  package_install "bc rsync mlocate bash-completion pkgstats arch-wiki-lite"
+  package_install "git bc rsync mlocate bash-completion pkgstats arch-wiki-lite"
   pause_function
   print_title "(UN)COMPRESS TOOLS - https://wiki.archlinux.org/index.php/P7zip"
   package_install "zip unzip unrar p7zip lzop cpio"
@@ -534,7 +534,8 @@ install_zsh(){
         if [[ $OPTION == y ]]; then
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
           cd /home/${username}
-          run_as_user "sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)""
+          run_as_user "wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
+          run_as_user "sh /home/${username}/install.sh"
           cd ${AUI_DIR}
           cp ${AUI_DIR}/.zshrc /home/${username}
           echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
@@ -543,7 +544,8 @@ install_zsh(){
         fi
       else
         cd /home/${username}
-        run_as_user "sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)""
+        run_as_user "wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
+        run_as_user "sh /home/${username}/install.sh"
         cd ${AUI_DIR}
         cp ${AUI_DIR}/.zshrc /home/${username}
         echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
