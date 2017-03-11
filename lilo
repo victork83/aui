@@ -1919,7 +1919,7 @@ install_internet_apps(){
                   aur_package_install "google-chrome"
                   ;;
                 2)
-                  package_install "chromium"
+                  package_install "chromium pepper-flash"
                   ;;
                 3)
                   package_install "firefox firefox-i18n-$LOCALE_FF"
