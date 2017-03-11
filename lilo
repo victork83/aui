@@ -529,21 +529,25 @@ install_zsh(){
   print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter. "
   read_input_text "Install zsh" $ZSH
   if [[ $OPTION == y ]]; then
-    package_install "zsh zsh-completions zsh-syntax-highlighting"
+    package_install "zsh zsh-completions zsh-syntax-highlighting wget"
     read_input_text "Install oh-my-zsh" $OH_MY_ZSH
     if [[ $OPTION == y ]]; then
       if [[ -f /home/${username}/.zshrc ]]; then
         read_input_text "Replace current .zshrc file"
         if [[ $OPTION == y ]]; then
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
-          run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
+          cd /home/${username}
+          run_as_user "sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)""
+          cd ${AUI_DIR}
           cp ${AUI_DIR}/.zshrc /home/${username}
           echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
           chown ${username}:users /home/${username}/.zshrc
           run_as_user "$EDITOR /home/${username}/.zshrc"
         fi
       else
-        run_as_user "sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
+        cd /home/${username}
+        run_as_user "sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)""
+        cd ${AUI_DIR}
         cp ${AUI_DIR}/.zshrc /home/${username}
         echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
         chown ${username}:users /home/${username}/.zshrc
@@ -564,10 +568,10 @@ setup_shell(){
     select OPT in "${defbash_list[@]}"; do
       case "$REPLY" in
         1)
-          chsh -s /bin/zsh
+          run_as_user "chsh -s /bin/zsh"
           ;;
         2)
-          chsh -s /bin/bash
+          run_as_user "chsh -s /bin/bash"
           ;;
         *)
           invalid_option
@@ -1528,7 +1532,7 @@ install_accessories_apps(){
           package_install "doublecmd-qt"
           ;;
         12)
-          package_install "kwrite"
+          package_install "kwrite kdiff3"
           ;;
         "b")
           break
@@ -1581,10 +1585,12 @@ install_development_apps(){
           ;;
         5)
           aur_package_install "android-sdk android-sdk-platform-tools android-sdk-build-tools android-platform"
+          groupadd sdkusers
           add_user_to_group ${username} sdkusers
           chown -R :sdkusers /opt/android-sdk/
           chmod -R g+w /opt/android-sdk/
           add_line "export ANDROID_HOME=/opt/android-sdk" "/home/${username}/.bashrc"
+          add_line "export ANDROID_HOME=/opt/android-sdk" "/home/${username}/.zshrc"
           aur_package_install "android-studio"
           ;;
         6)
