@@ -124,7 +124,7 @@
   # 2) Wicd
   # 3) ConnMan
   # n) None
-  NETWORKMANAGER=1
+  NETWORKMANAGER=2
   #USB 3G MODEM SUPPORT
   USBMODEM="n"
 #}}}
