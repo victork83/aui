@@ -433,7 +433,7 @@ add_custom_repositories(){
 #BASIC SETUP {{{
 install_basic_setup(){
   print_title "BASH TOOLS - https://wiki.archlinux.org/index.php/Bash"
-  package_install "git bc rsync mlocate bash-completion pkgstats arch-wiki-lite"
+  package_install "git wget bc rsync mlocate bash-completion pkgstats arch-wiki-lite"
   pause_function
   print_title "(UN)COMPRESS TOOLS - https://wiki.archlinux.org/index.php/P7zip"
   package_install "zip unzip unrar p7zip lzop cpio"
@@ -526,27 +526,21 @@ install_zsh(){
   print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter. "
   read_input_text "Install zsh" $ZSH
   if [[ $OPTION == y ]]; then
-    package_install "zsh zsh-completions zsh-syntax-highlighting wget"
+    package_install "zsh zsh-completions zsh-syntax-highlighting"
     read_input_text "Install oh-my-zsh" $OH_MY_ZSH
     if [[ $OPTION == y ]]; then
       if [[ -f /home/${username}/.zshrc ]]; then
-        read_input_text "Replace current .zshrc file"
+        read_input_text "Replace current .zshrc file?"
         if [[ $OPTION == y ]]; then
           run_as_user "mv /home/${username}/.zshrc /home/${username}/.zshrc.bkp"
-          cd /home/${username}
-          run_as_user "wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
-          run_as_user "sh /home/${username}/install.sh"
-          cd ${AUI_DIR}
+          run_as_user "git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git /home/${username}/.oh-my-zsh"
           cp ${AUI_DIR}/.zshrc /home/${username}
           echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
           chown ${username}:users /home/${username}/.zshrc
           run_as_user "$EDITOR /home/${username}/.zshrc"
         fi
       else
-        cd /home/${username}
-        run_as_user "wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
-        run_as_user "sh /home/${username}/install.sh"
-        cd ${AUI_DIR}
+        run_as_user "git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git /home/${username}/.oh-my-zsh"
         cp ${AUI_DIR}/.zshrc /home/${username}
         echo "DEFAULT_USER=${username}" >> /home/${username}/.zshrc
         chown ${username}:users /home/${username}/.zshrc
