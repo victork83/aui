@@ -19,7 +19,7 @@ script_name=$0 # присваиваем переменной script_name зна�
 #WELCOME {{{
 welcome(){
   clear
-  echo -e "${Bold}Welcome to the Archlinux U Install script by victork83 (запущен файл - 'pwd'$script_name)${White}"
+  echo -e "${Bold}Welcome to the Archlinux U Install script by victork83 (запущен файл - $script_name)${White}"
   print_line
   echo "Requirements:"
   echo "-> Archlinux installation"
@@ -36,6 +36,11 @@ welcome(){
   [[ ! -f /etc/pacman.conf.aui ]] && cp -v /etc/pacman.conf /etc/pacman.conf.aui || echo "/etc/pacman.conf.aui";
   [[ -f /etc/ssh/sshd_config.aui ]] && echo "/etc/ssh/sshd_conf.aui";
   [[ -f /etc/sudoers.aui ]] && echo "/etc/sudoers.aui";
+  echo
+  echo
+  echo
+  echo '==============================================================='
+  echo
   echo 'Данный скрипт выполняет установку базы и ПО Arch Linux'
   echo
   echo 'ВАЖНО!!!! Предполагается что вы знаете и понимаете что делаете.'
@@ -458,6 +463,7 @@ install_basic_setup(){
   print_title "POWERPILL - https://wiki.archlinux.org/index.php/powerpill"
   print_info "Powerpill is a Pacman wrapper that uses parallel and segmented downloading to try to speed up downloads for Pacman. Internally it uses Aria2 and Reflector to achieve this. Powerpill can also use Rsync  for official mirrors that support it."
   aur_package_install "powerpill"
+  package_install "aria2"
   pause_function
 }
 #}}}

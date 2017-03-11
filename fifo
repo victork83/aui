@@ -35,8 +35,8 @@ echo 'Включаем синхронизацию времени'
 timedatectl set-ntp true
 echo
 echo 'Проверка'
-sleep 2
 timedatectl status
+sleep 2
 echo
 
 #ARCHLINUX INSTALL SCRIPTS MODE {{{
