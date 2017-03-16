@@ -535,7 +535,8 @@ install_zsh(){
   print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter. "
   read_input_text "Install zsh" $ZSH
   if [[ $OPTION == y ]]; then
-    package_install "zsh zsh-completions zsh-syntax-highlighting"
+    run_as_user "yaourt -Sy zsh zsh-completions zsh-syntax-highlighting"
+#    package_install "zsh zsh-completions zsh-syntax-highlighting"
     read_input_text "Install oh-my-zsh" $OH_MY_ZSH
     if [[ $OPTION == y ]]; then
       if [[ -f /home/${username}/.zshrc ]]; then
