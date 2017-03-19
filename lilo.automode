@@ -124,7 +124,7 @@
   # 2) Wicd
   # 3) ConnMan
   # n) None
-  NETWORKMANAGER=2
+  NETWORKMANAGER=1
   #USB 3G MODEM SUPPORT
   USBMODEM="n"
 #}}}
@@ -230,7 +230,7 @@
     #10) Trasmission
     #11) uGet
     #12) youtube-dl
-    DOWNLOAD_OPTIONS="3-4 5 11-12"
+    DOWNLOAD_OPTIONS="3-4 5 7 11-12"
   #}}}
   #EMAIL|RSS {{{
     # 1) Liferea
@@ -280,7 +280,7 @@
     #13) Timidity++
     #14) Tomahawk
     #15) quodlibet
-    AUDIO_PLAYER_OPTIONS="1 4-5 10"
+    AUDIO_PLAYER_OPTIONS="1 4-5 10-11"
   #}}}
   #EDITORS|TOOLS {{{
     # 1) Audacity
