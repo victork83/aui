@@ -15,6 +15,7 @@ VBoxManage convertfromraw <путь к ISO-образу> <путь к VDI-фай
 - Перед запуском скрипта (в UEFI режиме) рекомендуется проверить загрузочные записи системы: 'efibootmgr'
 - Удалить ненужные записи можно командой: 'efibootmgr --delete-bootnum - b XXXX'
 - Более подробно про UEFI: 'https://goo.gl/Jz11LO'
+- ROSA и UEFI-режим в VirtualBox: 'https://goo.gl/V5qOfo'
 - Тема оформления Arc Dark: 'https://goo.gl/0Ltcpl'
 
 ## Как получить этот скрипт
