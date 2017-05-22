@@ -170,9 +170,6 @@ select_user(){
       passwd ${username}
     done
     package_install "xdg-user-dirs"
-    cp ${AUI_DIR}/user-dirs.dirs /home/${username}/.config
-    chown ${username}:users /home/${username}/.config/user-dirs.dirs
-    run_as_user "xdg-user-dirs-update"
     pause_function
     configure_user_account
   }
@@ -2881,6 +2878,9 @@ install_extra(){
 #}}}
 #FINISH {{{
 finish(){
+  print_title "Создаем папки в домашней директории"
+  run_as_user "LC_ALL=C xdg-user-dirs-update"
+  pause_function
   print_title "WARNING: PACKAGES INSTALLED FROM AUR"
   print_danger "List of packages not officially supported that may kill your cat:"
   pause_function
