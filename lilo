@@ -169,6 +169,10 @@ select_user(){
     while [[ $? -ne 0 ]]; do
       passwd ${username}
     done
+    package_install "xdg-user-dirs"
+    cp ${AUI_DIR}/user-dirs.dirs /home/${username}/.config
+    chown ${username}:users /home/${username}/.config/user-dirs.dirs
+    run_as_user "xdg-user-dirs-update"
     pause_function
     configure_user_account
   }
